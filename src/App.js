@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React , {useState} from 'react'
 import './App.css';
+import Pricing from './Components/Pricing';
+import AnnuallyData from './Components/AnnuallyData.json';
+import Card from './Components/Card'
 
-function App() {
+
+
+const App = () => {
+
+  const [choice, setChoice] = useState(AnnuallyData)
+  const [isAnnual, setIsAnnual] = useState(true)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Pricing 
+      setChoice={setChoice} 
+      setIsAnnual={setIsAnnual} 
+      isAnnual={isAnnual}
+      />
+      <div className="card-container">
+        {choice.map(data => (
+          <Card key={data.id} data={data}/>
+        ))}
+      </div>
     </div>
+   
   );
 }
 
